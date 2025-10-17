@@ -7,3 +7,11 @@ ul{
 li{
     margin: 10px;
 }
+.search{
+    text-align: center;
+    margin: 1rem 0;
+}
+.search-input{
+    width: 32rem;
+    margin: 0 1rem;
+}
