@@ -1,15 +1,20 @@
 import React from 'react';
-import './AboutMe.css';
+import './About.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faJsSquare, faReact, faAndroid } from '@fortawesome/free-brands-svg-icons';
+import { faReact, faAndroid } from '@fortawesome/free-brands-svg-icons';
 import { faClipboard, faCode, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 
-function AboutMe() {
+function About() {
     return (
         <section className="about-section">
             <div className="container-fluid p-0">
                 <div className="row no-gutters position-relative">
+                    <div className="left-header d-none d-lg-block col-lg-3 col-xl-4">
+                        <div className="v-center-box d-flex align-items-end text-uppercase">
+                            <h2 className="mb-0">About Me</h2>
+                        </div>
+                    </div>
                     <div className="col-lg-9 col-xl-8">
                         <div className="main-content p-5">
                             <div className="main-header mb-4">
@@ -19,7 +24,7 @@ function AboutMe() {
 
                             <div className="row mb-5">
                                 <div className="mb-5 mb-sm-4 col-md-4">
-                                    <img src="../assets/images.png" alt="Colorful Wall" />
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1562170824-b547dae88b97%3Fixlib%3Drb-1.2.1%26q%3D80%26fm%3Djpg%26crop%3Dentropy%26cs%3Dtinysrgb%26w%3D1080%26fit%3Dmax%26ixid%3DeyJhcHBfaWQiOjEyMDd9&f=1&nofb=1&ipt=3297dc486f28119ae97048f7fb49ab96fa909c571ef7f0381b689bf3a91729f6" alt="Colorful Wall" />
                                 </div>
                                 <div className="col-md-8">
                                     <div className="about__text mb-5 mb-sm-4 mb-md-4">
@@ -97,6 +102,6 @@ function AboutMe() {
             </div>
         </section>
     );
-};
+}
 
-export default AboutMe;
+export default About;
