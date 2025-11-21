@@ -7,7 +7,6 @@ import ErrorBox from "../components/ErrorBox";
 export default function ItemDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
-
     const [product, setProduct] = useState(null);
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(true);

@@ -7,21 +7,27 @@ import {BrowserRouter, Routes, Route} from "react-router";
 import About from "./pages/About";
 import ProductsList from "./pages/ProductsList";
 import Header from "./components/Header";
+import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
+import {AuthProvider} from "./services/AuthContext";
 
 function App() {
 
     return (
-        <BrowserRouter>
-            <Header />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/products" element={<ProductsList />} />
-                <Route path="/products/:id" element={<ProductDetails />} />
-
-                <Route path="/login" element={<Login />} />
-            </Routes>
-        </BrowserRouter>
+        <AuthProvider>
+            <BrowserRouter>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/products" element={<ProductsList />} />
+                    <Route path="/products/:id" element={<ProductDetails />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/profile" element={<Profile />} />
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
     );
 
 }

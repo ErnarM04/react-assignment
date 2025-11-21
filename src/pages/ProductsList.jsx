@@ -10,7 +10,6 @@ function ProductsList() {
     const [products, setProducts] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
     const initialQuery = searchParams.get("q") || "";
-
     const [searchQuery, setSearchQuery] = useState(initialQuery);
 
     useEffect(() => {
