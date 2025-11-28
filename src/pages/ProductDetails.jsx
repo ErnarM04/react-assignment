@@ -3,37 +3,34 @@ import { useParams, useNavigate } from "react-router";
 import { getProductById } from "../services/ItemsService";
 import Spinner from "../components/Spinner";
 import ErrorBox from "../components/ErrorBox";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchProductById} from "../features/items/itemsSlice";
 
 export default function ItemDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const [product, setProduct] = useState(null);
     const [image, setImage] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const {selectedItem, loadingItem, errorItem} = useSelector(state => state.items);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setLoading(true);
-        getProductById(id)
-            .then((data) => {
-                setProduct(data);
-                setImage(data.images?.[0]);
-                console.log(data);
-            })
-            .catch(() => setError("Failed to load product"))
-            .finally(() => setLoading(false));
-    }, [id]);
+        dispatch(fetchProductById(id));
+    }, [dispatch, id]);
 
-    if (loading)
+    useEffect(() => {
+        if (selectedItem) setImage(selectedItem.images[0]);
+    }, [selectedItem])
+
+    if (loadingItem)
         return (
             <div className="d-flex mt-5 justify-content-center align-items-center">
                 <Spinner />
             </div>
         );
 
-    if (error) return <ErrorBox message={error} />;
+    if (errorItem) return <ErrorBox message={errorItem} />;
 
-    if (product.message) return <ErrorBox message={"Product not found"} />;
+    if (!selectedItem) return <ErrorBox message={"Product not found"} />;
 
     return (
         <div className="container mt-4">
@@ -46,13 +43,13 @@ export default function ItemDetails() {
                 <div className="col-md-4 mb-4">
                     <img
                         src={image}
-                        alt={product.title}
+                        alt={selectedItem.title}
                         className="img-fluid rounded my-3 shadow-sm"
                         style={{ width: "360px", height: "100%" }}
                     />
 
                     <div className="d-flex gap-2 flex-wrap">
-                        {product.images?.map((imgSrc, index) => (
+                        {selectedItem.images?.map((imgSrc, index) => (
                             <img
                                 key={index}
                                 src={imgSrc}
@@ -71,14 +68,14 @@ export default function ItemDetails() {
                 </div>
 
                 <div className="col-md-6 mb-4">
-                    <h2>{product.title}</h2>
-                    <h5 className="text-success">{product.price}$</h5>
-                    <p>{product.description}</p>
+                    <h2>{selectedItem.title}</h2>
+                    <h5 className="text-success">{selectedItem.price}$</h5>
+                    <p>{selectedItem.description}</p>
 
-                    <p><b>Category:</b> {product.category}</p>
-                    <p><b>Brand:</b> {product.brand}</p>
-                    <p><b>Stock:</b> {product.stock}</p>
-                    <p><b>Rating:</b> {product.rating}</p>
+                    <p><b>Category:</b> {selectedItem.category}</p>
+                    <p><b>Brand:</b> {selectedItem.brand}</p>
+                    <p><b>Stock:</b> {selectedItem.stock}</p>
+                    <p><b>Rating:</b> {selectedItem.rating}</p>
                 </div>
             </div>
 
